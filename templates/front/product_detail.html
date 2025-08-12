@@ -9,7 +9,7 @@
 {#        <div class="product-price">Price: ${{ product.price }}</div>#}
 {#        <div class="product-actions">#}
 {#            <a class="product-add-btn" href="{{ url_for('add_to_cart', pid=product.id) }}">Add to Cart</a>#}
-{#            <a class="product-back-link" href="{{ url_for('catalog') }}">Back to Shoping</a>#}
+{#            <a class="product-back-link" href="{{ url_for('catalog') }}">Back to Catalog</a>#}
 {#        </div>#}
 {#    </div>#}
 {#</div>#}
@@ -27,10 +27,9 @@
         <div class="product-price">Price: ${{ product.price }}</div>
         <div class="product-actions">
             <a class="product-add-btn" href="{{ url_for('add_to_cart', pid=product.id) }}">Add to Cart</a>
-            <a class="product-back-link" href="{{ url_for('catalog') }}">Back to Catalog</a>
+            <a class="product-back-link" href="{{ url_for('catalog') }}">Back to Shoping</a>
         </div>
     </div>
 </div>
 {% endblock %}
-
 

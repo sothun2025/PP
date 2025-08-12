@@ -630,9 +630,15 @@ def get_product(pid):
     return next((prod for prod in PRODUCTS if prod['id'] == pid), None)
 
 # --- Home Page ---
+# @app.route('/')
+# def home():  # put application's code here
+#     return render_template('front/home.html')
 @app.route('/')
-def home():  # put application's code here
-    return render_template('front/home.html')
+def home():
+    # pick any set you like (popular, onSale, etc.)
+    featured = PRODUCTS[:6]
+    return render_template('front/home.html', featured=featured)
+
 
 @app.route('/search')
 def search():
@@ -704,14 +710,30 @@ def cart():
             total += item_total
     return render_template('front/cart.html', cart_items=cart_items, total=total)
 
-# --- Add to Cart ---
+@app.context_processor
+def inject_cart_count():
+    cart = session.get('cart', {})
+    count = sum(cart.values()) if cart else 0
+    return {"cart_count": count}
+
+
 @app.route('/add_to_cart/<int:pid>')
 def add_to_cart(pid):
     cart = session.get('cart', {})
     cart[str(pid)] = cart.get(str(pid), 0) + 1
     session['cart'] = cart
     flash('Item added to cart!')
-    return redirect(url_for('cart'))# ជ្រើសរើស page ត្រឡប់
+    next_url = request.args.get('next') or request.referrer or url_for('catalog')
+    return redirect(next_url)
+
+# --- Add to Cart ---
+# @app.route('/add_to_cart/<int:pid>')
+# def add_to_cart(pid):
+#     cart = session.get('cart', {})
+#     cart[str(pid)] = cart.get(str(pid), 0) + 1
+#     session['cart'] = cart
+#     flash('Item added to cart!')
+#     return redirect(url_for('cart'))# ជ្រើសរើស page ត្រឡប់
 
 # --- Remove from Cart ---
 @app.route('/remove_from_cart/<int:pid>')
