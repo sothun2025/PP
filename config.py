@@ -9,3 +9,4 @@ class Config:
     TELEGRAM_BOT_TOKEN = '8021006374:AAGruM-a23yXeo6gDeN-NoZzV4z0RtPppkk'
     TELEGRAM_CHAT_ID = '@PP_su33'    # ប្តូរជា chat id ផ្ទាល់របស់អ្នក
     MAIL_CONTACT_TO = 'sothunthoeun1@gmail.com'  # where contact messages go
+

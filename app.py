@@ -760,6 +760,10 @@ def delete_from_cart(pid):
     flash('Item deleted from cart!')
     return redirect(url_for('cart'))
 
+@app.route('/order_success')
+def order_success():
+    return render_template('front/order_success.html')
+
 # --- Checkout Page ---
 # @app.route('/checkout', methods=['GET', 'POST'])
 # def checkout():
@@ -893,8 +897,10 @@ def checkout():
             send_invoice_email(email, email_subject, email_body)
 
             session['cart'] = {}
-            flash('Order placed! Check your email for invoice.')
-            return redirect(url_for('home'))
+            return redirect(url_for('order_success'))
+            # session['cart'] = {}
+            # flash('Order success🎊 Check your email for invoice.')
+            # return redirect(url_for('cart'))
 
         except Exception as e:
             print("Checkout error:", e)
